@@ -1,0 +1,197 @@
+:root{
+    --rojo: #e65100;
+    --verde: #66bb6a;
+    --azul: #03a9f4;
+    --blanco: #FFF;
+    --negro: #000;
+    --gris-claro: #d9d9d9;
+    --gris-oscuro: #737373;
+
+    --fuenteLogo: 'BIZ UDPMincho', serif;
+
+}
+
+body{
+    height: 100%;
+    background-color: var(--blanco);
+    overflow: hidden;
+}
+
+.main{
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    /* margin-left: 15%; */
+}
+
+.video{
+    height: 80vh;
+    width: 100%;
+}
+
+.divRight{
+    margin-top: -8rem;
+}
+
+.logo{
+    font-size: 6rem;
+    font-family: var(--fuenteLogo);
+    margin-top: -7rem;
+}
+
+@media(max-width: 768px) {
+    .logo{
+        margin-top: 0;
+        font-size: 6rem;
+        font-family: var(--fuenteLogo);
+    }
+
+    .main{
+        position: relative;
+        top: 20px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+    }
+}
+
+@media(max-width: 500px) {
+    .logo{
+        font-size: 4rem;
+    }
+    .main{
+        top: 40px;
+    }
+}
+
+/* Galaxy forl */
+
+@media(max-width: 300px) {
+    .logo{
+        font-size: 3rem;
+    }
+    .main{
+        top: 40px;
+    }
+}
+
+.line-right-left{
+    width: 100%;
+    height: 1px;
+    border: solid 1px black;
+}
+
+.btn-google{
+    background-color: var(--gris-claro);
+    border: 3px solid var(--negro);
+    border-radius: 80px;
+}
+
+.enlace{
+    color: var(--azul);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.divEmail{
+    position: relative;
+    width: 100%;
+}
+
+.divEmail__input, .divPassword__input{
+    padding-left: 30px;
+    background-color: var(--gris-claro);
+    border: 4px solid var(--negro);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.divEmail__i{
+    position: absolute;
+    top:30px;
+    left:10px
+}
+
+.divPassword{
+    position: relative;
+    width: 100%;
+}
+
+.divPassword__i{
+    position: absolute;
+    top:28px;
+    left:10px;
+}
+
+.divPassword__visibility{
+    position: absolute;
+    top:28px;
+    right:10px;
+}
+
+.btn-login{
+    background: var(--rojo);
+    color: var(--negro);
+    font-size: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 40px;
+    border: none;
+}
+
+.btn-google{
+    color: var(--negro);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.mode{
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    width: fit-content;
+    background-color: var(--negro);
+    border-radius: 15px;
+    border: 1px solid var(--negro);
+    cursor: pointer;
+}
+
+html.dark-mode{
+    filter: invert(100%);
+}
+html.dark-mode img{
+    filter: invert(100%);
+}
+
+html.dark-mode .moon{
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+html.dark-mode .sun{
+    background-color: var(--blanco);
+    padding: 0;
+    border-radius: 0;
+}
+
+
+.sun{
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+
+/* MODAL */
+
+.divEmail__i--modal{
+    position: absolute;
+    top: 19px;
+    left:10px
+}

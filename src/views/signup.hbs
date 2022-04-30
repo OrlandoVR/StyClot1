@@ -1,0 +1,21 @@
+<div class="container main">
+    <div class="row ">
+        <div class="col-6 d-none d-xl-block d-lg-block">
+            <h2 class="logo">StyClot</h2>
+            <img class="video" src="/video/StyClot_video_inicio_render.gif">
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12">
+            <h2 class="text-center fs-1">Sign Up</h2>
+            <form class="d-flex flex-column" action="" method="post">
+                {{>input-email}}
+                {{>input-password}}
+                {{>input-repeatPassword}}
+                <input class="btn-login mt-5" type="button" value="Create Account">
+            </form>
+            <p class="enlace d-flex justify-content-end mt-3 mb-5 fs-5">Sign in</p>
+            {{>line-or-line}}
+            {{>btn-google}}
+        </div>
+    </div>
+</div>
+{{>mode-dark}}

@@ -1,0 +1,21 @@
+<div class="container main">
+    <div class="row ">
+        <div class="col-6 d-none d-xl-block d-lg-block">
+            <img class="video" src="/video/StyClot_video_inicio_render.gif">
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12">
+            <h2 class="text-center logo">StyClot</h2>
+            <form class="d-flex flex-column" action="" method="post">
+                {{>input-email}}
+                {{>input-password}}
+                <input class="btn-login mt-5" type="button" value="Log in">
+            </form>
+            <p class="enlace d-flex justify-content-end mt-3 mb-5 fs-5">Sign up</p>
+            {{>line-or-line}}
+            {{>btn-google}}
+            <p class="enlace d-flex justify-content-center mt-4 fs-4" data-bs-toggle="modal" data-bs-target="#modal-write-email">Did you forget your password?</p>
+        </div>
+        {{>modal-recoverPassword}}
+    </div>
+</div>
+{{>mode-dark}}
