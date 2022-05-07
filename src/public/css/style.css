@@ -65,6 +65,9 @@ body{
     .main{
         top: 40px;
     }
+    .margenTop{
+        margin-top: 10px !important;
+    }
 }
 
 /* Galaxy forl */
@@ -73,8 +76,12 @@ body{
     .logo{
         font-size: 3rem;
     }
+
     .main{
         top: 40px;
+    }
+    .margenTop{
+        margin-top: 10px !important;
     }
 }
 
@@ -91,6 +98,7 @@ body{
 }
 
 .enlace{
+    width: max-content;
     color: var(--azul);
     text-decoration: underline;
     cursor: pointer;
@@ -123,6 +131,17 @@ body{
 }
 
 .divPassword__i{
+    position: absolute;
+    top:28px;
+    left:10px;
+}
+
+.divUserName{
+    position: relative;
+    width: 100%;
+}
+
+.divUserName__i{
     position: absolute;
     top:28px;
     left:10px;

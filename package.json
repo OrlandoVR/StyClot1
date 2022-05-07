@@ -35,6 +35,8 @@
     "nodemon": "^2.0.15",
     "npm-check-updates": "^12.5.9",
     "passport": "^0.5.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sharp": "^0.30.4",
+    "uuid": "^8.3.2"
   }
 }

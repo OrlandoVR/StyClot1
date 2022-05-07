@@ -6,13 +6,26 @@
         </div>
         <div class="col-xl-6 col-lg-6 col-md-12">
             <h2 class="text-center fs-1">Sign Up</h2>
-            <form class="d-flex flex-column" action="" method="post">
+            <form class="d-flex flex-column" action="/signup" method="post" enctype="multipart/form-data">
+                <div class="divUserName">
+                    <i class="fa-solid fa-user divUserName__i"></i>
+                    <input class="form-control divEmail__input" type="text" name="userName" id="userName"
+                        placeholder="User Name" value="{{userName}}">
+                </div>
+                <div>
+                    <input type="file" name="image" id="image">
+                </div>
                 {{>input-email}}
                 {{>input-password}}
                 {{>input-repeatPassword}}
-                <input class="btn-login mt-5" type="button" value="Create Account">
+                {{#each errors}}
+                    <p class="text-danger">{{text}}</p>
+                {{/each}}
+                <input class="btn-login mt-5 margenTop" type="submit" value="Create Account">
             </form>
-            <p class="enlace d-flex justify-content-end mt-3 mb-5 fs-5">Sign in</p>
+            <div class="d-flex justify-content-end">
+                <a href="/" class="enlace mt-3 fs-5">Sign in</a>
+            </div>
             {{>line-or-line}}
             {{>btn-google}}
         </div>
