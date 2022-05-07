@@ -5,16 +5,11 @@ const multer = require("multer");
 const uuid = require("uuid");
 const flash = require("connect-flash");
 const session = require("express-session");
-
-/*const storage = multer.diskStorage({ // Esto es una configuracion de multer
-    destination: path.join(__dirname, "public/img"), // Destino donde se almacenaran las imagenes
-    filename: (req, file, cb) =>{
-        cb(null, uuid.v4() + path.extname(file.originalname).toLocaleLowerCase()) // Nombre del archivo con el que se va a guardar, en este caso con un id aleatorio
-    }
-});*/
+const passport = require("passport");
 
 // Initializations server
 const app = express();
+require("./config/passport")
 
 // Settings
 app.set("port", process.env.PORT || 3005);
@@ -35,33 +30,16 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use(passport.initialize()); // Esta primera configuracion necesita passport para que funcione 
+app.use(passport.session())// Esta segunda configuracion necesita passport para que funcione 
+app.use(flash());
 
 
-/*app.use(multer({
-    storage, // Usamos la configuracion de arriba
-    dest: path.join(__dirname, "public/img"), // Destino de donde se almacenara la imagen
-    limits: {fileSize: 1000000},
-    fileFilter: (req, file, cb) =>{
-        const filetypes = /jpeg|jpg|png/
-        const mimetype = filetypes.test(file.mimetype)
-        const extname = filetypes.test(path.extname(file.originalname))
-        
-        if(mimetype && extname){
-            console.log(file)
-            console.log(req.body)
-            return cb(null, true) // Validamos que la imagen sea una extension de imagen
-        }else{
-            cb("Error: El archivo debe ser una imagen valida");
-        } 
-    }
-}).single("image")) // Indica que se va a subir solo una imagen*/
-
-app.use(flash())
 
 // Global Variables
 
 app.use((req, res, next) => {
-    res.locals.error_msg = req.flash("error_msg");
+    res.locals.error = req.flash("error"); // Passport lo agrega con el nombre de "error"
     next();
 });
 

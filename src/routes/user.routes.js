@@ -8,7 +8,7 @@ const { Router } = require('express')
 
 const router = Router();
 
-const { renderSigninForm, signin, renderSignupForm, signup, logout, addImageUserName } = require("../controllers/user.controller")
+const { renderSigninForm, signin, renderSignupForm, signup, logout, addImageUserName, eliminar } = require("../controllers/user.controller")
 
 router.get("/", renderSigninForm)
 
@@ -19,6 +19,8 @@ router.get("/user/signup", renderSignupForm)
 router.post("/signup", upload.single("image") ,signup)
 
 router.get("/logout", logout)
+
+router.get("/eliminar", eliminar)
 
 //router.post("/signup/imageUserName", addImageUserName)
 
