@@ -1,0 +1,41 @@
+{{>nav-publication}}
+{{>navigation-bar}}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h4>Description</h4>
+            <textarea class="form-control" name="addDescriptionImage" id="addDescriptionImage" cols="30" rows="10" placeholder="Write a description"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-3" id="cuerpo-addImage">
+            <h4>Image</h4>
+            
+            <div class="contenedor">
+                <div class="wrapper">
+                    <div class="image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <div class="text">No file chosen, yet!</div>
+                    </div>
+                    <div id="cancel-btn"><i class="fas fa-times"></i></div>
+                    <div class="file-name">File name here</div>
+                </div>
+                <input type="file" id="default-btn" hidden>
+                <button id="custom-btn">Choose a file</button>
+            </div>
+
+
+        </div>
+        <div class="col 12 d-flex justify-content-end">
+            <img src="/svgIcons/addTag.svg" alt="" width="25px" height="25px" class="icon-tag">
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <button class="btn button-post" data-toggle="modal" data-target="#modal-tag">Publicar</button>
+        </div>
+        {{>modal-tag}}
+    </div>
+</div>

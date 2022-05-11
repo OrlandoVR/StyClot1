@@ -17,10 +17,11 @@
             {{>line-or-line}}
             {{>btn-google}}
             <div class="d-flex justify-content-center">
-                <a class="enlace mt-4 fs-4" data-bs-toggle="modal" data-bs-target="#modal-write-email">Did you forget your password?</a>
+                <a class="enlace mt-4 fs-4" id="openModalWriteEmail">Did you forget your password?</a>
             </div>
         </div>
         {{>modal-recoverPassword}}
+        {{>modal-recoveryPasswordWrite}}
     </div>
 </div>
 {{>mode-dark}}

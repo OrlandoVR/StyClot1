@@ -22,7 +22,8 @@ passport.use(new LocalStrategy({
             return done(null, user) // Se almacena la sesion en passport
         }else{
             return done(null, false, { // Si no se coincide la contraseña envia un mensaje de error
-                message: "Incorrect Password"
+                message: "Incorrect Password",
+                email
             })
         }
     }

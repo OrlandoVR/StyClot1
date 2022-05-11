@@ -34,8 +34,6 @@ app.use(passport.initialize()); // Esta primera configuracion necesita passport 
 app.use(passport.session())// Esta segunda configuracion necesita passport para que funcione 
 app.use(flash());
 
-
-
 // Global Variables
 
 app.use((req, res, next) => {
@@ -44,7 +42,8 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use(require('./routes/user.routes'));
+app.use(require("./routes/user.routes"));
+app.use(require("./routes/publication.routes"));
 
 // Static Files
 app.use(express.static(path.join(__dirname, "public")));

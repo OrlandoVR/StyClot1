@@ -14,7 +14,7 @@ indexCtrl.renderSigninForm = (req, res) => {
 };
 
 indexCtrl.signin = passport.authenticate("local", { /*local = Este nombre lo ponen siempre por defecto*/
-    successRedirect: "/eliminar",
+    successRedirect: "/publications",
     failureRedirect: "/",
     failureFlash: true
 });
@@ -90,12 +90,42 @@ indexCtrl.signup = async (req, res) => {
     }
 };
 
-indexCtrl.logout = (req, res) => {
-    res.send("Log out")
+indexCtrl.recoveryPass = (req, res) =>{
+    console.log(req.body)
 };
 
-indexCtrl.eliminar = (req, res) => {
-    res.send("Logueado")
+indexCtrl.verificarEmail = async (req, res) => {
+    const email = req.body.recoveryEmail
+
+    const findEmail = await User.findOne({email})
+    if (findEmail) res.json({ rst:  true })
+    else res.json({ rst:  false })
+}
+
+indexCtrl.checkSamePassword = async (req, res) => {
+    console.log(req.body);
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const user = await User.findOne({email})
+    user.password = await user.encrypPassword(password)
+    user.save()
+    // const updatePass = await User.update({
+    //     email: email    
+    // },
+    // {
+    //     $set: {
+    //         password: await User.password.encrypPassword(password)
+    //     }
+    // })
+
+    if(user.password) res.json({ rst: true })
+    else res.json({ rst: false })
+}
+
+indexCtrl.logout = (req, res) => {
+    req.logout();
+    res.redirect("/")
 };
 
 module.exports = indexCtrl
