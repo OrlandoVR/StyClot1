@@ -8,7 +8,7 @@ const { Router } = require('express')
 
 const router = Router();
 
-const { renderSigninForm, signin, renderSignupForm, signup, logout, addImageUserName, recoveryPass, verificarEmail, checkSamePassword} = require("../controllers/user.controller")
+const { renderSigninForm, signin, renderSignupForm, signup, logout, addImageUserName, recoveryPass, verificarEmail, checkSamePassword, eliminar} = require("../controllers/user.controller")
 
 router.get("/", renderSigninForm)
 
@@ -25,6 +25,8 @@ router.post("/recoveryPass", recoveryPass)
 router.post("/verificarEmail", verificarEmail)
 
 router.post("/checkSamePassword", checkSamePassword)
+
+router.get("/eliminar", eliminar)
 
 //router.post("/signup/imageUserName", addImageUserName)
 

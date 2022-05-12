@@ -80,7 +80,7 @@ indexCtrl.signup = async (req, res) => {
             const imageBuffer = await processedImage.toBuffer()
             const pathImage = uuid.v4() + path.extname(req.file.originalname).toLocaleLowerCase()
 
-            fs.writeFileSync(path.join(__dirname, `../public/img/${pathImage}`), imageBuffer)
+            fs.writeFileSync(path.join(__dirname, `../public/img/user/${pathImage}`), imageBuffer)
 
             const newUser = new User({ userName, email, password, profile_image: pathImage })
             newUser.password = await newUser.encrypPassword(password)
@@ -127,6 +127,10 @@ indexCtrl.logout = (req, res) => {
     req.logout();
     res.redirect("/")
 };
+
+indexCtrl.eliminar = (req, res) => {
+    res.render("eliminar")
+}
 
 module.exports = indexCtrl
 

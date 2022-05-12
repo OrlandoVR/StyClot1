@@ -1,6 +1,10 @@
+
 var recoveryEmailGlobal = null
 
 $(function(){
+
+    // Log out
+    
     $("#logout").on("click", () => {
         window.location = "/logout"
     });
@@ -108,5 +112,21 @@ $(function(){
 
     $("#custom-btn").on("click", () => {
         $("#default-btn").click();
+    })
+
+    $("#default-btn").on("change", (e) => {
+
+        const file = e.target.files[0]
+
+        if(file){
+            let reader = new FileReader();
+
+            reader.onload = () => {
+                const result = reader.result;
+                $("#imageAddPost").attr("src", result)
+            }
+            reader.readAsDataURL(file)
+            $(".content").hide()
+        }
     })
 });

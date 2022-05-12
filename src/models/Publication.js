@@ -1,9 +1,9 @@
 const {Schema, model} = require("mongoose");
 
 const PublicationSchema = new Schema({
-    userId: {type: String, required: true},
+    user: {type: Object, required: true},
     image: {type: String, required: true},
-    description: {type: String, required: false}
+    description: {type: String, required: true}
 },{
     timestamps: true
 });

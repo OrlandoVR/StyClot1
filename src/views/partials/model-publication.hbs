@@ -1,23 +1,18 @@
 <div class="container">
+    {{#each publications}}
     <div class="row mt-5 divPublication">
         <div class="col-12">
             <div class="d-flex align-items-center ms-2">
-                <img src="/svgIcons/person.jpg" alt="person" width="50px" height="50px" class="rounded-circle">
-                <p class="fs-4 ms-2 mt-3">Pepito Chocolatero</p>
+                <img class ="img-thumbnail rounded-circle" src="/img/user/{{this.user.profile_image}}" alt="person" width="50px" height="50px" class="rounded-circle">
+                <p class="fs-4 ms-2 mt-3">{{this.user.userName}}</p>
             </div>
         </div>
         <div class="col-12">
-            <p class="fs-6 ms-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod architecto vitae sit
-                delectus!
-                Blanditiis recusandae, veritatis sint dolores deleniti delectus, dolore repellendus voluptates quis
-                optio
-                reprehenderit rem quia ut mollitia quisquam, qui quae error fugit autem ipsa nulla omnis vitae. Sequi
-                nulla
-                voluptates necessitatibus maiores, sit enim quisquam molestiae natus?</p>
+            <p class="fs-6 ms-2">{{this.description}}</p>
         </div>
         <div class="col-10">
             <div class="d-flex align-items-center">
-                <img class="img-fluid img-publication" src="/svgIcons/playa.jpg" alt="">
+                <img class="img-fluid img-publication" src="/img/post/{{this.image}}" alt="">
             </div>
         </div>
         <div class="col-2 separacion">
@@ -26,4 +21,5 @@
             <div class="divIcons__rack"></div>
         </div>
     </div>
+    {{/each}}
 </div>
