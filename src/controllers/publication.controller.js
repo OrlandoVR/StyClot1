@@ -4,13 +4,13 @@ const path = require("path")
 
 const Publication = require("../models/Publication")
 const User = require("../models/User")
+const { use } = require("passport")
 
 const indexCtrl = {};
 
 indexCtrl.allPublication = async (req, res) => {
     const userId = req.user.id;
     const publications =await Publication.find({userId}).sort({createdAt: "desc"}).lean();
-    console.log(publications)
     
     res.render("home", { publications });
 }
@@ -21,6 +21,17 @@ indexCtrl.newPublication = (req, res) => {
 
 indexCtrl.goChat = (req, res) => {
     res.render("chat")
+}
+
+indexCtrl.goMyProfile = async (req, res) => {
+    const idUser = req.user.id
+    const userName = req.user.userName
+    const user = await User.findById(idUser).lean()
+    const publications = await Publication.find({"user.userName": userName}).lean(); 
+    
+    console.log(publications)
+
+    res.render("myProfile", {user, publications})
 }
 
 indexCtrl.postPublication = async (req, res) => {

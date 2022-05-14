@@ -4,7 +4,7 @@ var recoveryEmailGlobal = null
 $(function(){
 
     // Log out
-    
+
     $("#logout").on("click", () => {
         window.location = "/logout"
     });
@@ -108,6 +108,14 @@ $(function(){
         window.location = "/newPublications";
     })
 
+    $("#iconChat").on("click", () =>{
+        window.location = "/chat";
+    })
+    
+    $("#myProfile").on("click", () =>{
+        window.location = "/profile";
+    })
+
     //Subir imagen a un contenedor
 
     $("#custom-btn").on("click", () => {
@@ -128,5 +136,24 @@ $(function(){
             reader.readAsDataURL(file)
             $(".content").hide()
         }
+    })
+
+    // Boton añadir tag
+
+    $("#icon-tag").on("click", () =>{
+        $("#modal-tag").modal("show")
+    })
+
+    $("#close-modal-tag").on("click", () =>{
+        $("#modal-tag").modal("hide")
+    })
+
+    $("#close-btnSuperior-modal-tag").on("click", () =>{
+        $("#modal-tag").modal("hide")
+    })
+
+    $("#add-modal-tag").on("click", () =>{
+        const store = $("#store-modal-tag").val()
+        const price = $("#price-modal-tag").val()
     })
 });

@@ -1,29 +1,63 @@
-
 <div class="modal fade" id="modal-tag" tabindex="-1" role="dialog" aria-labelledby="modal-tag" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-btnSuperior-modal-tag">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form>
+
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img id="icon-pants" src="pngIcons/pants.png" alt=""></div>
+              <div class="swiper-slide"><img id="icon-sun-hat" src="pngIcons/sun-hat.png" alt=""></div>
+              <div class="swiper-slide"><img id="icon-sandals" src="pngIcons/sandals.png" alt=""></div>
+              <div class="swiper-slide"><img id="icon-dress" src="pngIcons/dress.png" alt=""></div>
+              <div class="swiper-slide"><img id="icon-t-shirt" src="pngIcons/t-shirt.png" alt=""></div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="recipient-name" class="col-form-label">Where you bought it:</label>
+            <input type="text" class="form-control" id="store-modal-tag">
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="message-text" class="col-form-label">How much did it cost:</label><br>
+            <input type="number" name="price-modal-tag" id="">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-modal-tag">Close</button>
+        <button type="button" class="btn btn-primary" id="add-modal-tag">Add Tag</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        slidesPerGroup: 3,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
