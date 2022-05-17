@@ -5,22 +5,14 @@
     <div class="row">
         <div class="col-3 addScroll">
             {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
-            {{>model-user-chat-list}}
         </div>
         <div class="col-1"></div>
         <div class="col-8">
+            {{#if user}}
             <div class="d-flex justify-content-center align-items-center top-bar-chat">
                 <div class="target-chat-image-name p-2">
-                    <img class="rounded-circle" src="/svgIcons/person.jpg" alt="">
-                    <p>User Name</p>
+                    <img class="rounded-circle" src="/img/user/{{user.profile_image}}" alt="">
+                    <p>{{user.userName}}</p>
                 </div>
             </div>
             <div class="content-chat">
@@ -46,10 +38,19 @@
                     <p>Todo Bien</p>
                 </div>
             </div>
-            <div class="box-send-message mt-3">
-                <input type="text" name="sendMessageChat" id="sendMessageChat" placeholder="Write a message">
+
+            <div class="input-group mt-3">
+                <input type="hidden" id="chatReceptor" value="{{user.userName}}">
+                <input type="text" class="form-control" placeholder="Write a message ... " id="input-chat-text-message">
+                <button class="btn btn-outline-secondary" id="btn-chat-send-message">Send</button>
+            </div>
+
+            {{else}}
+            <div class="bg-light" height="700px">
 
             </div>
+            {{/if}}
         </div>
     </div>
 </div>
+

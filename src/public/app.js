@@ -1,4 +1,3 @@
-
 var recoveryEmailGlobal = null
 
 $(function(){
@@ -109,7 +108,20 @@ $(function(){
     })
 
     $("#iconChat").on("click", () =>{
-        window.location = "/chat";
+
+        $.ajax({
+            url: "/getIdUser",
+            method: "POST",
+            success: (res) =>{
+                const rst = res.rst
+                if(rst){
+                    window.location = `/chat/${rst}`;
+                }
+            },
+            error: () => {
+                alert("error")
+            }   
+        })
     })
     
     $("#myProfile").on("click", () =>{

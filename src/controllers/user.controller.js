@@ -123,6 +123,19 @@ indexCtrl.checkSamePassword = async (req, res) => {
     else res.json({ rst: false })
 }
 
+indexCtrl.allUsers = async (req, res) => {
+    const allUsers = await User.find({})
+    res.json({ allUsers })
+};
+
+indexCtrl.getIdUser = (req, res) =>{
+    res.json({ rst:req.user.id })
+}
+
+indexCtrl.getMyUserName = (req, res) =>{
+    const userName = req.user.userName
+    res.json({userName})
+}
 indexCtrl.logout = (req, res) => {
     req.logout();
     res.redirect("/")

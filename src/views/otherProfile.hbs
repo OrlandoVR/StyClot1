@@ -4,28 +4,20 @@
 <div class="container">
     <div class="row d-flex justify-content-center mt-5 mb-5">
         <div class="col-12 d-flex justify-content-center gap-4">
-            <img class="rounded-circle bg-black" src="/img/user/{{user.profile_image}}" alt="" width="200px" height="200px">
+            <img class="rounded-circle bg-primary" src="/img/user/{{this.user.profile_image}}" alt="" width="200px" height="200px">
             <div class="d-dlex flex-column align-self-center">
                 <p>{{user.userName}}</p>
                 <p>Publicaciones</p>
                 <p>{{publications.length}}</p>
+                <a href="/chat/{{user._id}}"><button class="btn btn-primary">Enviar Mensaje</button></a>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col d-flex justify-content-center border">
-            <img src="pngIcons/myImages.png" alt="">
-        </div>
-        <div class="col d-flex justify-content-center border">
-            <img src="pngIcons/myCloset.png" alt="">
-        </div>
-    </div>
-
     
     <div class="row">
         {{#each publications}}
         <div class="col-4">
-            <img src="img/post/{{this.image}}" alt="" height="300px">
+            <img src="/img/post/{{this.image}}" alt="" height="300px">
         </div>
         {{/each}}
     </div>

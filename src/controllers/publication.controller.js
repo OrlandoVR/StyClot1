@@ -28,8 +28,6 @@ indexCtrl.goMyProfile = async (req, res) => {
     const userName = req.user.userName
     const user = await User.findById(idUser).lean()
     const publications = await Publication.find({"user.userName": userName}).lean(); 
-    
-    console.log(publications)
 
     res.render("myProfile", {user, publications})
 }
@@ -47,6 +45,20 @@ indexCtrl.postPublication = async (req, res) => {
     await newPublication.save();
 
     res.redirect("/publications")
+}
+
+indexCtrl.goOtherProfile = async(req, res) => {
+    const myUserId = req.user.id
+    const otherUserId = req.params.id
+
+    if(myUserId === otherUserId) res.redirect("/profile")
+    else{
+         const user =await User.findById(otherUserId).lean()
+         const userName = user.userName 
+         const publications = await Publication.find({"user.userName": userName}).lean(); 
+
+        res.render("otherProfile", {user, publications})
+    }
 }
 
 module.exports = indexCtrl
