@@ -6,6 +6,7 @@ const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     profile_image: {type: String, required: false},
+    siguiendo: {type: [String] , required: false},
     login_google: {type: Boolean, required: false}
 }, {
     timestamps: true // Sirve para cuando crear un schema o lo actualizes, te manda el timestamp y de ahi lo conviertes a fecha

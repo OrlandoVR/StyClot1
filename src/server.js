@@ -7,6 +7,16 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
 
+const equal = ("equal", (lista, myUserName) =>{
+    for( i in lista){
+        if(lista[i] == myUserName){
+            return "likePress"
+        }
+    }
+    // if(lista.indexOf(myUserName) !== -1) return "likePress"
+    // else return
+})
+
 // Initializations server
 const app = express();
 require("./config/passport")
@@ -18,7 +28,10 @@ app.engine(".hbs", exphbs.engine({
     defaultLayout: "main",
     layoutsDir: path.join(app.get("views"), "layouts"),
     partialsDir: path.join(app.get("views"), "partials"),
-    extname: ".hbs"
+    extname: ".hbs",
+    helpers: {
+        equal: equal
+    }
 }));
 
 app.set("view engine", ".hbs");

@@ -3,7 +3,9 @@
     <div class="row mt-5 divPublication">
         <div class="col-12">
             <div class="d-flex align-items-center ms-2">
-                <a href="/otherProfile/{{this.user._id}}"><img class ="img-thumbnail rounded-circle" src="/img/user/{{this.user.profile_image}}" alt="person" width="50px" height="50px" class="rounded-circle"></a>
+                <a href="/otherProfile/{{this.user._id}}"><img class="img-thumbnail rounded-circle"
+                        src="/img/user/{{this.user.profile_image}}" alt="person" width="50px" height="50px"
+                        class="rounded-circle"></a>
                 <p class="fs-4 ms-2 mt-3">{{this.user.userName}}</p>
             </div>
         </div>
@@ -16,7 +18,11 @@
             </div>
         </div>
         <div class="col-2 separacion">
-            <div class="divIcons__like"></div>
+            {{!-- <input type="hidden" name="" id="hidden-id-publication" value="{{this._id}}"> --}}
+            <div class="divIcons__like">
+                <i class="fa-solid fa-face-grin-wide icon-like {{equal this.like ../userName}}" data-id="{{this._id}}"></i>
+            </div>
+            <div><p class="numLikes" data-id="{{this._id}}">{{this.like.length}}</p></div>
             <div class="divIcons__comment"></div>
             <div class="divIcons__rack"></div>
         </div>

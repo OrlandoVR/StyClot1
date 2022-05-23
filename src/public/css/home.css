@@ -95,10 +95,17 @@ a{
 }
 
 .divIcons__like{
-    background: url(../svgIcons/like.svg);
     width: 25px;
     height: 25px;
+    font-size: 25px;
+}
+
+.icon-like{
     cursor: pointer;
+}
+
+.likePress{
+    color: yellow;
 }
 
 .divIcons__comment{
@@ -323,4 +330,26 @@ a{
 
 #icon-pants, #icon-t-shirt, #icon-sun-hat, #icon-sandals, #icon-dress {
     cursor: pointer;
+}
+
+/* Buscador */
+
+.contenedor-buscador{
+    width: 100%;
+    z-index: 1;
+    margin-top: 1rem;
+}
+
+.item-buscador img{
+    width: 40px;
+    height: 40px;
+}
+
+.item-buscador{
+    margin: 5px;
+    padding: 5px;
+}
+
+.item-buscador:hover{
+    background-color: #66bb6a;
 }

@@ -4,7 +4,8 @@ const uuid = require("uuid");
 const fs = require("fs")
 const passport = require("passport");
 
-const User = require("../models/User")
+const User = require("../models/User");
+const Publication = require("../models/Publication");
 
 const indexCtrl = {};
 
@@ -143,6 +144,68 @@ indexCtrl.logout = (req, res) => {
 
 indexCtrl.eliminar = (req, res) => {
     res.render("eliminar")
+}
+
+indexCtrl.seguir = async (req, res) => {
+    const myIdUser = req.user.id
+    const hiddenUserName = req.body.otherUserName
+    console.log(hiddenUserName)
+
+    const user = await User.findById(myIdUser)
+
+    await user.siguiendo.push(hiddenUserName)
+    await user.save()
+
+    res.json({rst: true})
+}
+
+indexCtrl.dejarSeguir = async (req, res) => {
+
+    const myIdUser = req.user.id
+    const hiddenUserName = req.body.otherUserName
+
+    const user = await User.findById(myIdUser)
+    const lista = user.siguiendo
+
+    lista.forEach((element, i) => {
+        if(element == hiddenUserName) lista.splice(i,1)
+    });
+
+    user.siguiendo = lista
+    await user.save()
+
+    res.json({rst: true})
+}
+
+indexCtrl.lesigue = async (req, res) =>{
+    const myIdUser = req.user.id
+    const hiddenUserName = req.body.otherUserName
+
+    const user = await User.findById(myIdUser)
+    const lista = user.siguiendo
+
+    //console.log(hiddenUserName)
+    //console.log(lista)
+
+    // const element = lista.find( e => {
+    //     e == hiddenUserName
+    // })
+
+    // console.log(element)
+
+    if( lista.indexOf(hiddenUserName) > -1) res.json({rst: true})
+    else res.json({rst: false})
+}
+
+indexCtrl.allUsersByLetter = async(req, res) =>{
+
+    const inputText = req.body.inputText;
+
+    const reg = new RegExp('^'+inputText)
+
+    const allUsers = await User.find({ userName: reg })
+
+    res.json({ allUsers })
 }
 
 module.exports = indexCtrl

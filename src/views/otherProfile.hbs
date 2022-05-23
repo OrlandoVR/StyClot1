@@ -4,16 +4,21 @@
 <div class="container">
     <div class="row d-flex justify-content-center mt-5 mb-5">
         <div class="col-12 d-flex justify-content-center gap-4">
-            <img class="rounded-circle bg-primary" src="/img/user/{{this.user.profile_image}}" alt="" width="200px" height="200px">
+            <img class="rounded-circle bg-primary" src="/img/user/{{this.user.profile_image}}" alt="" width="200px"
+                height="200px">
             <div class="d-dlex flex-column align-self-center">
                 <p>{{user.userName}}</p>
                 <p>Publicaciones</p>
                 <p>{{publications.length}}</p>
                 <a href="/chat/{{user._id}}"><button class="btn btn-primary">Enviar Mensaje</button></a>
+
+                <input type="checkbox" class="btn-check" id="btn-seguir" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btn-seguir" id="label-btn-seguir">Seguir</label><br>
+                <input type="hidden" name="" value="{{user.userName}}" id="hiddenUserName">
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         {{#each publications}}
         <div class="col-4">
@@ -22,3 +27,24 @@
         {{/each}}
     </div>
 </div>
+
+<script>
+
+    const hiddenUserName = $("#hiddenUserName").val()
+
+    $.ajax({
+        url: "/lesigue",
+        method: "POST",
+        data: { otherUserName: hiddenUserName },
+        success: (res) => {
+            const rst = res.rst
+            if (rst) {
+                $("#label-btn-seguir").text("Siguiendo")
+                $("#btn-seguir").prop("checked", true)
+            }
+        },
+        error: () => {
+            alert("error")
+        }
+    })
+</script>

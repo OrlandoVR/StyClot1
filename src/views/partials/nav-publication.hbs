@@ -2,45 +2,25 @@
 <script src="/chat.js"></script>
 
 <nav class="navigation">
-  <form action="" method="post" class="form">
-    <div class="form__divSearch">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input class="formSearch__inputText" type="text" name="search" id="search" placeholder="Search in StyClot">
+    
+    <div class="d-flex form">
+        
+        <div class="form__divSearch position-relative">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="formSearch__inputText" type="text" name="search" id="search" placeholder="Search in StyClot" autocomplete="off">
+            <div class="position-absolute contenedor-buscador bg-primary" id="contenedor-buscadorId">
+            
+            </div>
+        </div>
+
+        <h1 class="formSearch__logoNavigation">StyClot</h1>
+    
     </div>
-    <h1 class="formSearch__logoNavigation">StyClot</h1>
-  </form>
-  <div class="navigation__divIcons">
-    <div class="divIcons__user" id="myProfile"></div>
-    <div class="divIcons__logout" id="logout"></div>
-  </div>
+      
+      
+    <div class="navigation__divIcons">
+        <div class="divIcons__user" id="myProfile"></div>
+        <div class="divIcons__logout" id="logout"></div>
+    </div>
+
 </nav>
-
-<script>
-
-  $.ajax({
-    url: "/allUsers",
-    method: "POST",
-    success: (res) => {
-      console.log(res.allUsers);
-
-      const names = []
-
-      res.allUsers.forEach(element => {
-        names.push(element.userName)
-      });
-
-      $("#search").on("keyup", e => {
-        names.forEach(element => {
-          if (element.includes(e.target.value.toLowerCase())) console.log(element)
-        });
-      });
-
-    },
-    error: () => {
-      alert("error")
-    }
-
-  })
-
-
-</script>
