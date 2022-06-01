@@ -5,10 +5,11 @@ const storageStrategy = multer.memoryStorage()
 const upload = multer({ storage: storageStrategy})
 
 const { Router } = require('express')
+const { isAuthenticated } = require("../helpers/auth");
 
 const router = Router();
 
-const { renderSigninForm, signin, renderSignupForm, signup, logout, addImageUserName, recoveryPass, verificarEmail, checkSamePassword, allUsers,eliminar, getIdUser, getMyUserName, seguir, dejarSeguir, lesigue, allUsersByLetter} = require("../controllers/user.controller")
+const { renderSigninForm, signin, renderSignupForm, signup, logout, addImageUserName, recoveryPass, verificarEmail, checkSamePassword, allUsers,eliminar, getIdUser, getMyUserName, seguir, dejarSeguir, lesigue, allUsersByLetter, online} = require("../controllers/user.controller")
 
 router.get("/", renderSigninForm)
 
@@ -18,7 +19,7 @@ router.get("/user/signup", renderSignupForm)
 
 router.post("/signup", upload.single("image") ,signup)
 
-router.get("/logout", logout)
+router.get("/logout",isAuthenticated, logout)
 
 router.post("/recoveryPass", recoveryPass)
 
@@ -26,21 +27,23 @@ router.post("/verificarEmail", verificarEmail)
 
 router.post("/checkSamePassword", checkSamePassword)
 
-router.post("/allUsers", allUsers)
+router.post("/allUsers",isAuthenticated, allUsers)
 
-router.post("/allUsersByLetter", allUsersByLetter)
+router.post("/allUsersByLetter",isAuthenticated, allUsersByLetter)
 
-router.get("/eliminar", eliminar)
+router.get("/eliminar",isAuthenticated, eliminar)
 
-router.post("/getIdUser", getIdUser)
+router.post("/getIdUser",isAuthenticated, getIdUser)
 
-router.get("/getMyUserName", getMyUserName)
+router.get("/getMyUserName",isAuthenticated, getMyUserName)
 
-router.post("/seguir", seguir)
+router.post("/seguir",isAuthenticated, seguir)
 
-router.post("/dejarSeguir", dejarSeguir)
+router.post("/dejarSeguir",isAuthenticated, dejarSeguir)
 
-router.post("/lesigue", lesigue)
+router.post("/lesigue",isAuthenticated, lesigue)
+
+router.get("/online",isAuthenticated, online)
 
 //router.post("/signup/imageUserName", addImageUserName)
 

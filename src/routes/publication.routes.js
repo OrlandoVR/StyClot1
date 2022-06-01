@@ -14,18 +14,18 @@ publicationRouter.get("/publications", isAuthenticated, allPublication)
 
 publicationRouter.get("/newPublications", isAuthenticated, newPublication)
 
-publicationRouter.get("/chat", goChat)
+publicationRouter.get("/chat",isAuthenticated, goChat)
 
-publicationRouter.get("/profile", goMyProfile)
+publicationRouter.get("/profile",isAuthenticated, goMyProfile)
 
-publicationRouter.get("/otherProfile/:id", goOtherProfile)
+publicationRouter.get("/otherProfile/:id",isAuthenticated, goOtherProfile)
 
 publicationRouter.post("/newPublications", upload.single("imageAddPost"), postPublication)
 
-publicationRouter.post("/like", like)
+publicationRouter.post("/like",isAuthenticated, like)
 
-publicationRouter.post("/dislike", dislike)
+publicationRouter.post("/dislike",isAuthenticated, dislike)
 
-publicationRouter.post("allLikes", allLikes)
+publicationRouter.post("allLikes",isAuthenticated, allLikes)
 
 module.exports = publicationRouter

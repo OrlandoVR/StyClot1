@@ -17,6 +17,16 @@ a{
     color: var(--negro);
 }
 
+.chat-time-emisor{
+    display: flex;
+    justify-content: end;
+}
+
+.chat-time-receptor{
+    display: flex;
+    justify-content: start;
+}
+
 .navigation{
     display: flex;
     justify-content: space-between;
@@ -282,10 +292,17 @@ a{
 }
 
 .estado-user{
-    background: var(--azul);
     width: 20px;
     height: 20px;
     border-radius: 10px;
+}
+
+.offline{
+    background: var(--rojo);
+}
+
+.online{
+    background: var(--azul);
 }
 
 .top-bar-chat{
@@ -293,6 +310,7 @@ a{
 }
 
 .content-chat{
+    overflow: scroll;
     background: var(--gris-oscuro);
     height: 500px;
 }

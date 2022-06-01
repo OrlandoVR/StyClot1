@@ -13,8 +13,6 @@ const equal = ("equal", (lista, myUserName) =>{
             return "likePress"
         }
     }
-    // if(lista.indexOf(myUserName) !== -1) return "likePress"
-    // else return
 })
 
 // Initializations server

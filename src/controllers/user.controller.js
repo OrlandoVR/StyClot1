@@ -6,6 +6,7 @@ const passport = require("passport");
 
 const User = require("../models/User");
 const Publication = require("../models/Publication");
+const Chat = require("../models/Chat");
 
 const indexCtrl = {};
 
@@ -83,7 +84,7 @@ indexCtrl.signup = async (req, res) => {
 
             fs.writeFileSync(path.join(__dirname, `../public/img/user/${pathImage}`), imageBuffer)
 
-            const newUser = new User({ userName, email, password, profile_image: pathImage })
+            const newUser = new User({ userName, email, password, profile_image: pathImage, estado: false })
             newUser.password = await newUser.encrypPassword(password)
             await newUser.save();
             res.redirect("/")
@@ -206,6 +207,19 @@ indexCtrl.allUsersByLetter = async(req, res) =>{
     const allUsers = await User.find({ userName: reg })
 
     res.json({ allUsers })
+}
+
+indexCtrl.online = async(req, res) =>{
+    const myIdUser = req.user.id
+
+    const myUser = await User.findByIdAndUpdate(myIdUser, { estado: true })
+    
+    await Chat.updateMany({"emisor.userName": myUser.userName}, { "emisor.estado": true})
+    await Chat.updateMany({"receptor.userName": myUser.userName}, { "receptor.estado": true})
+
+    const listaChatUsuarios = await Chat.find({"emisor.userName": myUser.userName }, {"receptor.userName": 1, "receptor.estado": 1, "receptor._id": 1, _id: 0})
+
+    res.json({ listaChatUsuarios , userName: myUser.userName})
 }
 
 module.exports = indexCtrl
