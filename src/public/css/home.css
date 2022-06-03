@@ -371,3 +371,31 @@ a{
 .item-buscador:hover{
     background-color: #66bb6a;
 }
+
+
+/* Comments */
+
+.modal-body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+    height: 75vh;
+}
+
+.target-coment{
+    background-color: var(--gris-claro);
+    border-radius: 10px;
+}
+
+.target-coment img{
+    width: 70px;
+    height: 70px;
+}
+
+.target-coment div div p{
+    color: var(--verde);
+}
+
+.comment-date{
+    font-weight: bold;
+}

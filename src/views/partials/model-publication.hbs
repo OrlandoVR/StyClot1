@@ -20,12 +20,39 @@
         <div class="col-2 separacion">
             {{!-- <input type="hidden" name="" id="hidden-id-publication" value="{{this._id}}"> --}}
             <div class="divIcons__like">
-                <i class="fa-solid fa-face-grin-wide icon-like {{equal this.like ../userName}}" data-id="{{this._id}}"></i>
+                <i class="fa-solid fa-face-grin-wide icon-like {{equal this.like ../userName}}"
+                    data-id="{{this._id}}"></i>
             </div>
-            <div><p class="numLikes" data-id="{{this._id}}">{{this.like.length}}</p></div>
-            <div class="divIcons__comment"></div>
+            <div>
+                <p class="numLikes" data-id="{{this._id}}">{{this.like.length}}</p>
+            </div>
+            <div class="divIcons__comment" data-id="{{this._id}}"></div>
             <div class="divIcons__rack"></div>
         </div>
     </div>
     {{/each}}
+</div>
+
+<div class="modal fade bd-example-modal-lg modal-comment" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="content-chat">
+                
+            </div>
+            <div class="m-3">
+                <div class="d-flex gap-1">
+                    <input type="hidden" id="comment-id-publication" value="" name="idPublication">
+                    <input type="text" class="form-control" placeholder="Write a comment ... " name="commentText" id="comment-text">
+                    <button id="btn-comment" class="btn btn-outline-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

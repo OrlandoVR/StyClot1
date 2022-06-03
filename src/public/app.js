@@ -272,6 +272,88 @@ $(function () {
         })
     });
 
+    // Comentarios
+
+    $(".divIcons__comment").on("click", (e) => {
+        $("#comment-id-publication").val(e.target.dataset.id)
+
+        const idPublication = $("#comment-id-publication").val()
+
+        $.ajax({
+            url: "/commentByidPublication",
+            method: "POST",
+            data: { idPublication },
+            success: (res) => {
+
+                const publication = res.publications
+
+                $("#content-chat").html("")
+                if(publication.comments.length > 0){
+                    publication.comments.forEach(element => {
+                        $("#content-chat").append(`<div class="target-coment p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="target-commet-image-name d-flex align-items-center gap-2 mb-2">
+                                    <img class="rounded-circle" src="/img/user/${element.idUser.profile_image}" alt="">
+                                    <p class="fs-3">${element.idUser.userName}</p>
+                                </div>
+                                <p class="comment-date">${element.time}</p>
+                            </div>
+        
+                            <p>${element.text}</p>
+                        </div>`)
+                    });
+                }else{
+                    $("#content-chat").append(`<p id="comment-void">No hay comentarios</p>`)
+                }
+                
+            },
+            error: () => {
+                alert("error")
+            }
+
+        })
+
+        $(".modal-comment").modal("show")
+    })
+
+    $("#btn-comment").on("click", e => {
+
+        const idPublication = $("#comment-id-publication").val()
+        const commentText = $("#comment-text").val()
+
+        if (commentText != "") {
+            $.ajax({
+                url: "/comment",
+                method: "POST",
+                data: { idPublication, commentText },
+                success: (res) => {
+
+                    if($("#comment-void").length) $("#content-chat").html("")
+                    
+
+                    $("#content-chat").append(`<div class="target-coment p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="target-commet-image-name d-flex align-items-center gap-2 mb-2">
+                                    <img class="rounded-circle" src="/img/user/${res.myUser.profile_image}" alt="">
+                                    <p class="fs-3">${res.myUser.userName}</p>
+                                </div>
+                                <p class="comment-date">${res.time}</p>
+                            </div>
+        
+                            <p>${commentText}</p>
+                        </div>`)
+
+                        $("#comment-text").val("")
+                },
+                error: () => {
+                    alert("error")
+                }
+
+            })
+
+        }
+    })
+
     // Buscador
 
     $(document).on("click", function (e) {

@@ -12,10 +12,10 @@ indexCtrl.allPublication = async (req, res) => {
     const userId = req.user.id;
 
     const myUser = await User.findById(userId).lean();
-    console.log("-----"+myUser.userName)
+    console.log("-----" + myUser.userName)
 
-    const publications = await Publication.find({"user.userName": myUser.siguiendo }).sort({ createdAt: "desc" }).lean();
-    res.render("home", { publications, userName: myUser.userName});
+    const publications = await Publication.find({ "user.userName": myUser.siguiendo }).sort({ createdAt: "desc" }).lean();
+    res.render("home", { publications, userName: myUser.userName });
 }
 
 indexCtrl.newPublication = (req, res) => {
@@ -62,7 +62,7 @@ indexCtrl.goOtherProfile = async (req, res) => {
         const user = await User.findById(otherUserId).lean()
         //const myUser = await User.findById(myUserId).lean()
         const userName = user.userName
-        
+
         //const lista = myUser.siguiendo
 
         /*lista.forEach((element, i) => {
@@ -75,7 +75,7 @@ indexCtrl.goOtherProfile = async (req, res) => {
     }
 }
 
-indexCtrl.like = async (req, res) =>{
+indexCtrl.like = async (req, res) => {
     const myIdUser = req.user.id
     const publicationId = req.body.publicationId
 
@@ -85,10 +85,10 @@ indexCtrl.like = async (req, res) =>{
     await publication.like.push(myUser.userName)
     await publication.save()
 
-    res.json({rst: true})
+    res.json({ rst: true })
 }
 
-indexCtrl.dislike = async (req, res)=>{
+indexCtrl.dislike = async (req, res) => {
 
     const myIdUser = req.user.id
     const publicationId = req.body.publicationId
@@ -104,11 +104,34 @@ indexCtrl.dislike = async (req, res)=>{
 
     await publication.save()
 
-    res.json({rst: true})
+    res.json({ rst: true })
 }
 
-indexCtrl.allLikes = async (req, res) =>{
+indexCtrl.allLikes = async (req, res) => {
 
+}
+
+indexCtrl.comment = async (req, res) => {
+    const myIdUser = req.user.id
+    const idPublication = req.body.idPublication
+    const commentText = req.body.commentText
+
+    const time = new Date().toLocaleString()
+
+    const myUser = await User.findById(myIdUser)
+
+    await Publication.findOneAndUpdate({ "_id": idPublication }, { $push: { comments: { idUser: myIdUser, text: commentText, time } } })
+
+    res.json({ myUser, time })
+}
+
+indexCtrl.commentByidPublication = async (req, res) => {
+
+    const idPublication = req.body.idPublication
+
+    const publications = await Publication.findById(idPublication).populate("comments.idUser")
+
+    res.json({ publications })
 }
 
 module.exports = indexCtrl

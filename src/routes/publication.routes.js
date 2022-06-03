@@ -7,7 +7,7 @@ const { Router } = require("express")
 
 const publicationRouter = Router();
 
-const { allPublication, newPublication, postPublication, goChat, goMyProfile, goOtherProfile, like, dislike, allLikes} = require("../controllers/publication.controller")
+const { allPublication, newPublication, postPublication, goChat, goMyProfile, goOtherProfile, like, dislike, allLikes, comment, commentByidPublication} = require("../controllers/publication.controller")
 const { isAuthenticated } = require("../helpers/auth");
 
 publicationRouter.get("/publications", isAuthenticated, allPublication)
@@ -27,5 +27,9 @@ publicationRouter.post("/like",isAuthenticated, like)
 publicationRouter.post("/dislike",isAuthenticated, dislike)
 
 publicationRouter.post("allLikes",isAuthenticated, allLikes)
+
+publicationRouter.post("/comment", isAuthenticated, comment)
+
+publicationRouter.post("/commentByidPublication", isAuthenticated, commentByidPublication)
 
 module.exports = publicationRouter

@@ -1,11 +1,19 @@
-const {Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const PublicationSchema = new Schema({
-    user: {type: Object, required: true},
-    image: {type: String, required: true},
-    description: {type: String, required: true},
-    like: {type: [String], required: false}
-},{
+    user: { type: Object, required: true },
+    image: { type: String, required: true },
+    description: { type: String, required: true },
+    like: { type: [String], required: false },
+    comments: [{
+        idUser: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
+        text: String,
+        time: String,
+    }]
+}, {
     timestamps: true
 });
 
