@@ -164,10 +164,10 @@ $(function () {
         $("#modal-tag").modal("hide")
     })
 
-    $("#add-modal-tag").on("click", () => {
-        const store = $("#store-modal-tag").val()
-        const price = $("#price-modal-tag").val()
-    })
+    // $("#add-modal-tag").on("click", () => {
+    //     const store = $("#store-modal-tag").val()
+    //     const price = $("#price-modal-tag").val()
+    // })
 
 
     // Boton Seguir
@@ -288,7 +288,7 @@ $(function () {
                 const publication = res.publications
 
                 $("#content-chat").html("")
-                if(publication.comments.length > 0){
+                if (publication.comments.length > 0) {
                     publication.comments.forEach(element => {
                         $("#content-chat").append(`<div class="target-coment p-3 mb-3">
                             <div class="d-flex justify-content-between align-items-center">
@@ -302,10 +302,10 @@ $(function () {
                             <p>${element.text}</p>
                         </div>`)
                     });
-                }else{
+                } else {
                     $("#content-chat").append(`<p id="comment-void">No hay comentarios</p>`)
                 }
-                
+
             },
             error: () => {
                 alert("error")
@@ -328,8 +328,8 @@ $(function () {
                 data: { idPublication, commentText },
                 success: (res) => {
 
-                    if($("#comment-void").length) $("#content-chat").html("")
-                    
+                    if ($("#comment-void").length) $("#content-chat").html("")
+
 
                     $("#content-chat").append(`<div class="target-coment p-3 mb-3">
                             <div class="d-flex justify-content-between align-items-center">
@@ -343,7 +343,7 @@ $(function () {
                             <p>${commentText}</p>
                         </div>`)
 
-                        $("#comment-text").val("")
+                    $("#comment-text").val("")
                 },
                 error: () => {
                     alert("error")
@@ -396,4 +396,90 @@ $(function () {
         }
     })
 
+    //TAG
+
+    $("#add-modal-tag").on("click", e => {
+
+        let tagName = ""
+        const storeName = $("#store-modal-tag").val()
+        const price = $("#price-modal-tag").val()
+
+        var tags = $(":input[name='check-tag']")
+
+        for (var i = 0; i < tags.length; i++) {
+            if (tags[i].checked) {
+                tagName = tags[i].value
+            }
+        }
+
+        const errors = []
+
+        if (tagName == "") errors.push("Elige una prenda")
+        if (storeName == "") errors.push("Escribe donde lo compraste")
+        if (price == "") errors.push("Escribe cuanto te costo")
+
+        if (errors.length > 0) {
+            $("#errors-form-publicar-tag").html("")
+            errors.forEach(element => {
+                $("#errors-form-publicar-tag").append(`<p class="text-danger"> ${element} </p>`)
+            });
+        } else {
+            $(".content-tag").append(`<div class="content-item-tag mb-3" data-image="${tagName}" data-storename="${storeName}" data-price="${price}">
+            <div>
+            <img src="pngIcons/${tagName}.png" alt="">
+            <p>${storeName}</p>
+            </div>
+            <div>
+            <p>${price}€</p>
+            <i class="fa-solid fa-xmark btn-delete-tag"></i>
+            </div>
+            </div>`)
+
+            $(".btn-delete-tag").on("click", e => {
+                e.currentTarget.parentNode.parentNode.remove()
+            })
+
+            $("#modal-tag").modal("hide")
+        }
+    })
+
+    // Publicar
+
+    $("#form-publicar").on("submit", e => {
+
+        const formData = new FormData(e.currentTarget)
+
+        const hijos = $(".content-tag").children()
+
+        const tags = {}
+        
+        for (var i = 0; i < hijos.length; i++) {
+
+            const image = hijos[i].dataset.image
+            const storeName = hijos[i].dataset.storename
+            const price = hijos[i].dataset.price
+
+            tags[i] = {
+                image,
+                storeName,
+                price
+            }
+            
+        }
+
+        $.ajax({
+            url: "/newPublications",
+            method: "POST",
+            data: { formData , tags},
+            success: (res) => {
+                console.log("muy bien")
+            },
+            error: () => {
+                alert("error")
+            }
+
+        })
+
+        e.preventDefault()
+    })
 });

@@ -3,7 +3,15 @@
 
 
 <div class="container mt-5">
-    <form action="/newPublications" method="post" enctype="multipart/form-data">
+
+    {{#each errors}}
+    <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+        <h4>{{this}}</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+    {{/each}}
+
+    <form {{!--action="/newPublications" --}} method="post" enctype="multipart/form-data" id="form-publicar">
         <div class="row">
             <div class="col-12">
                 <h4>Description</h4>
@@ -33,9 +41,13 @@
 
 
             </div>
-            <div class="col 12 d-flex justify-content-end">
+            <div class="col-12 d-flex justify-content-end mb-5">
                 <img src="/svgIcons/addTag.svg" alt="" width="25px" height="25px" class="icon-tag" id="icon-tag">
             </div>
+            <div class="col-12 content-tag">
+
+            </div>
+
             <div class="col-12 d-flex justify-content-center mt-5">
                 <input class="btn button-post" type="submit" value="Publicar">
             </div>

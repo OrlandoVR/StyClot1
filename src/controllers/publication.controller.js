@@ -37,17 +37,32 @@ indexCtrl.goMyProfile = async (req, res) => {
 
 indexCtrl.postPublication = async (req, res) => {
 
-    const user = await User.findById(req.user.id)
-    const image = req.file.originalname
+    //Ya te estan mandando los tags, revisa si te llega bien
+
     const description = req.body.addDescriptionImage
-
-    const pathImage = uuid.v4() + path.extname(image).toLowerCase()
-    fs.writeFileSync(path.join(__dirname, `../public/img/post/${pathImage}`), req.file.buffer)
-
-    const newPublication = await new Publication({ user, image: pathImage, description })
-    await newPublication.save();
-
-    res.redirect("/publications")
+    
+    const rf = req.file
+    
+    const errors = []
+    
+    if(rf == undefined){
+        errors.push("seleccione una imagen")
+    }
+    
+    if(errors.length>0){
+        res.render("newPublication", {errors})
+    }else{
+        const image = req.file.originalname
+        const user = await User.findById(req.user.id)
+        
+        const pathImage = uuid.v4() + path.extname(image).toLowerCase()
+        fs.writeFileSync(path.join(__dirname, `../public/img/post/${pathImage}`), req.file.buffer)
+    
+        const newPublication = await new Publication({ user, image: pathImage, description })
+        await newPublication.save();
+    
+        res.redirect("/publications")
+    }
 }
 
 indexCtrl.goOtherProfile = async (req, res) => {

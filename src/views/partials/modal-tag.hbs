@@ -9,14 +9,18 @@
       </div>
       <div class="modal-body">
         <form>
-
           <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide"><img id="icon-pants" src="pngIcons/pants.png" alt=""></div>
-              <div class="swiper-slide"><img id="icon-sun-hat" src="pngIcons/sun-hat.png" alt=""></div>
-              <div class="swiper-slide"><img id="icon-sandals" src="pngIcons/sandals.png" alt=""></div>
-              <div class="swiper-slide"><img id="icon-dress" src="pngIcons/dress.png" alt=""></div>
-              <div class="swiper-slide"><img id="icon-t-shirt" src="pngIcons/t-shirt.png" alt=""></div>
+            <div class="swiper-wrapper" id="content-swiper-wrapper">
+              <div class="swiper-slide"> <input type="radio" name="check-tag" id="check-pants" value="pants"> <label for="check-pants"> <img id="icon-pants"
+                    src="pngIcons/pants.png" alt=""> </label> </div>
+              <div class="swiper-slide"> <input type="radio" name="check-tag" id="check-sun-hat" value="sun-hat"> <label for="check-sun-hat" > <img id="icon-sun-hat"
+                    src="pngIcons/sun-hat.png" alt=""> </label> </div>
+              <div class="swiper-slide"> <input type="radio" name="check-tag" id="check-sandals" value="sandals"> <label for="check-sandals" > <img id="icon-sandals"
+                    src="pngIcons/sandals.png" alt=""> </label> </div>
+              <div class="swiper-slide"> <input type="radio" name="check-tag" id="check-dress" value="dress"> <label for="check-dress" > <img id="icon-dress"
+                    src="pngIcons/dress.png" alt=""> </label> </div>
+              <div class="swiper-slide"> <input type="radio" name="check-tag" id="check-t-shirt" value="t-shirt"> <label for="check-t-shirt" > <img id="icon-t-shirt"
+                    src="pngIcons/t-shirt.png" alt=""> </label> </div>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -28,7 +32,10 @@
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">How much did it cost:</label><br>
-            <input type="number" name="price-modal-tag" id="">
+            <input type="number" name="price-modal-tag" id="price-modal-tag">
+          </div>
+          <div id="errors-form-publicar-tag">
+
           </div>
         </form>
       </div>
@@ -41,23 +48,17 @@
 </div>
 
 <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <!-- Initialize Swiper -->
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        slidesPerGroup: 3,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-    </script>
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    slidesPerGroup: 3,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>

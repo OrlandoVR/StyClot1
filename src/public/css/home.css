@@ -260,6 +260,29 @@ a{
     background: linear-gradient(135deg, var(--azul) 0%, var(--verde) 100%);
 }
 
+/* Para publicar */
+
+.content-item-tag{
+    display: flex;
+    justify-content: space-between;
+    background: var(--gris-oscuro);
+    border-radius: 20px;
+    align-items: center;
+    padding: 1rem 2rem;
+    font-size: 3rem;
+}
+
+.content-item-tag div{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.content-item-tag div i{
+    color: red;
+    cursor: pointer;
+}
+
 
 /* CHAT */
 
@@ -348,6 +371,14 @@ a{
 
 #icon-pants, #icon-t-shirt, #icon-sun-hat, #icon-sandals, #icon-dress {
     cursor: pointer;
+}
+
+#content-swiper-wrapper input[type= radio]{
+    display: none;
+}
+
+#content-swiper-wrapper input[type= radio]:checked ~ label{
+    border: solid black 2px;
 }
 
 /* Buscador */
