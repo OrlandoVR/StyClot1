@@ -83,7 +83,7 @@ indexCtrl.signup = async (req, res) => {
             const pathImage = uuid.v4() + path.extname(req.file.originalname).toLocaleLowerCase()
 
             // fs.writeFileSync(path.join(__dirname, `../public/img/user/${pathImage}`), imageBuffer)
-            fs.writeFileSync(`./../public/img/user/${pathImage}`, imageBuffer)
+            fs.writeFileSync(path.join(__dirname, `../public/img/user/${pathImage}`), imageBuffer)
 
             const newUser = new User({ userName, email, password, profile_image: pathImage, estado: false })
             newUser.password = await newUser.encrypPassword(password)
