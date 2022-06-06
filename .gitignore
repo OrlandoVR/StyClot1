@@ -1,6 +1,3 @@
 .env
 node_modules/
 *.gif
-/src/public/img
-/src/public/svgIcons
-/src/public/pngIcons
