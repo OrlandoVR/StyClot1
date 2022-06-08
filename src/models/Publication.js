@@ -5,6 +5,7 @@ const PublicationSchema = new Schema({
     image: { type: String, required: true },
     description: { type: String, required: false },
     like: { type: [String], required: false },
+    tags: {type: [Object], required: false},
     comments: [{
         idUser: {
             type: Schema.Types.ObjectId,

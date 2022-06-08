@@ -212,6 +212,24 @@ $(function () {
         }
     })
 
+    //Rack
+    const racks = document.querySelectorAll(".icon-rack")
+    racks.forEach( rack =>{
+        rack.addEventListener("click", event =>{
+            const div_publication_like = document.querySelectorAll(".div-publication-tags")
+            div_publication_like.forEach( element =>{
+                if(event.target.dataset.id == element.dataset.id){
+                    if(window.getComputedStyle(element).getPropertyValue("display") == "none"){
+                        element.style.display = "block"
+                    }else{
+                        element.style.display="none"
+                    }
+                }
+            })
+        })
+    })
+
+
     //Like
 
     const likes = document.querySelectorAll(".icon-like")
@@ -445,16 +463,18 @@ $(function () {
 
     // Publicar
 
-    $("#form-publicar").on("submit", e => {
 
-        const formData = new FormData(e.currentTarget)
+    $("#form-publicar").on("submit", e => {
+        e.preventDefault()
+
+        let formData = new FormData(e.currentTarget)
 
         const hijos = $(".content-tag").children()
-
+        
         const tags = {}
         
         for (var i = 0; i < hijos.length; i++) {
-
+            
             const image = hijos[i].dataset.image
             const storeName = hijos[i].dataset.storename
             const price = hijos[i].dataset.price
@@ -464,22 +484,24 @@ $(function () {
                 storeName,
                 price
             }
-            
         }
+
+        formData.append("tags", JSON.stringify(tags))
+        
 
         $.ajax({
             url: "/newPublications",
+            contentType: false,
+            processData: false,
             method: "POST",
-            data: { formData , tags},
+            data: formData ,
             success: (res) => {
-                console.log("muy bien")
+                console.log("w")
+                window.location.href = "/publications"
             },
             error: () => {
                 alert("error")
             }
-
         })
-
-        e.preventDefault()
     })
 });

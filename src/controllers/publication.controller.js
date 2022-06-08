@@ -36,11 +36,12 @@ indexCtrl.goMyProfile = async (req, res) => {
 }
 
 indexCtrl.postPublication = async (req, res) => {
-
-    //Ya te estan mandando los tags, revisa si te llega bien
+    
+    console.log(req.body)
 
     const description = req.body.addDescriptionImage
-    
+    const stringTags = req.body.tags
+    const tags = JSON.parse(stringTags)
     const rf = req.file
     
     const errors = []
@@ -50,8 +51,10 @@ indexCtrl.postPublication = async (req, res) => {
     }
     
     if(errors.length>0){
+        console.log("1")
         res.render("newPublication", {errors})
     }else{
+        console.log("2")
         const image = req.file.originalname
         const user = await User.findById(req.user.id)
         
@@ -59,6 +62,13 @@ indexCtrl.postPublication = async (req, res) => {
         fs.writeFileSync(path.join(__dirname, `../public/img/post/${pathImage}`), req.file.buffer)
     
         const newPublication = await new Publication({ user, image: pathImage, description })
+    
+        console.log(tags)
+
+        for (const key in tags) {
+            newPublication.tags.push(tags[key])
+        }
+
         await newPublication.save();
     
         res.redirect("/publications")

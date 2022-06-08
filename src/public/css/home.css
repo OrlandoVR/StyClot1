@@ -126,10 +126,14 @@ a{
 }
 
 .divIcons__rack{
-    background: url(../svgIcons/rack.svg);
     width: 25px;
     height: 25px;
     cursor: pointer;
+}
+
+.divIcons__rack img{
+    width: 25px;
+    height: 25px;
 }
 
 .formSearch__inputText:focus{
@@ -196,7 +200,7 @@ a{
 
 .contenedor{
     height: 500px;
-    width: 75%;
+    width: 100%;
     margin-bottom: 110px;
 }
 
@@ -265,7 +269,7 @@ a{
 .content-item-tag{
     display: flex;
     justify-content: space-between;
-    background: var(--gris-oscuro);
+    background: var(--gris-claro);
     border-radius: 20px;
     align-items: center;
     padding: 1rem 2rem;
@@ -429,4 +433,23 @@ a{
 
 .comment-date{
     font-weight: bold;
+}
+
+
+/* Prpfile */
+
+#nav-profile div img{
+    width: 100px;
+    height: 100px;
+}
+
+#nav-profile div:hover{
+    cursor: pointer;
+    background-color: var(--azul);
+}
+
+/* Rack */
+
+.div-publication-tags{
+    display: none;
 }
