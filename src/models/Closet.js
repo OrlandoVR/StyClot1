@@ -1,14 +1,14 @@
-const {Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const ClosetSchema = new Schema({
-    user: {
+    idUser: {
         type: Schema.Types.ObjectId,
         ref: "User"
     },
     prendas: [{
-        _id: {type: ObjectId, required: true},
-        image: {type: String, required: true},
-        time: {type: String, required: true}
+        tagName: { type: String, required: true },
+        image: { type: String, required: true },
+        time: { type: Date, required: true }
     }]
 })
 

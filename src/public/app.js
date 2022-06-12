@@ -214,15 +214,15 @@ $(function () {
 
     //Rack
     const racks = document.querySelectorAll(".icon-rack")
-    racks.forEach( rack =>{
-        rack.addEventListener("click", event =>{
+    racks.forEach(rack => {
+        rack.addEventListener("click", event => {
             const div_publication_like = document.querySelectorAll(".div-publication-tags")
-            div_publication_like.forEach( element =>{
-                if(event.target.dataset.id == element.dataset.id){
-                    if(window.getComputedStyle(element).getPropertyValue("display") == "none"){
+            div_publication_like.forEach(element => {
+                if (event.target.dataset.id == element.dataset.id) {
+                    if (window.getComputedStyle(element).getPropertyValue("display") == "none") {
                         element.style.display = "block"
-                    }else{
-                        element.style.display="none"
+                    } else {
+                        element.style.display = "none"
                     }
                 }
             })
@@ -418,10 +418,10 @@ $(function () {
 
     $("#add-modal-tag").on("click", e => {
 
-        let tagName = ""
         const storeName = $("#store-modal-tag").val()
         const price = $("#price-modal-tag").val()
 
+        let tagName = ""
         var tags = $(":input[name='check-tag']")
 
         for (var i = 0; i < tags.length; i++) {
@@ -470,11 +470,11 @@ $(function () {
         let formData = new FormData(e.currentTarget)
 
         const hijos = $(".content-tag").children()
-        
+
         const tags = {}
-        
+
         for (var i = 0; i < hijos.length; i++) {
-            
+
             const image = hijos[i].dataset.image
             const storeName = hijos[i].dataset.storename
             const price = hijos[i].dataset.price
@@ -487,14 +487,14 @@ $(function () {
         }
 
         formData.append("tags", JSON.stringify(tags))
-        
+
 
         $.ajax({
             url: "/newPublications",
             contentType: false,
             processData: false,
             method: "POST",
-            data: formData ,
+            data: formData,
             success: (res) => {
                 console.log("w")
                 window.location.href = "/publications"
@@ -504,4 +504,55 @@ $(function () {
             }
         })
     })
+
+    // Slider Tags
+
+    $(":input[name='check-tag']").on("click", e => {
+        const regExp = new RegExp(/^\/closet\/\S*$/)
+
+        var tagName = e.currentTarget.defaultValue
+        $(".tagNameHidden").val(tagName)
+
+        const currentUrl = window.location
+
+        if (regExp.test(currentUrl.pathname) || currentUrl.pathname == "/closet") {
+            console.log("paso test")
+            // window.location.href = `/closet/${tagName}`
+            $.ajax({
+                url: `/closet/${tagName}`,
+                method: "GET",
+                success: (res) => {
+                    console.log("siu")
+                    console.log(res)
+                    $(".content-grid-closet").html("")
+                    if (res.sendClothes) {
+                        res.sendClothes.forEach(element => {
+                            $(".content-grid-closet").append(`<div class="grid-profile-item">
+                            <img src="/img/clothes/${element.image}" alt="" height="300px">
+                            <i class="fa-solid fa-xmark remove-clothe" onclick="openModalSureRemove(this)" data-id="${element._id}" data-tagname="${element.tagName}"></i>
+                            </div>
+                            `)
+                        });
+                    } else {
+                        $(".content-grid-closet").append(`<h4>${res.msg}</h4>`)
+                    }
+                },
+                error: () => {
+                    alert("error")
+                }
+            })
+        }
+    })
 });
+
+// Remove Clothe
+
+const openModalSureRemove = e=>{
+    console.log(e)
+
+    const id = e.dataset.id
+    const tagName = e.dataset.tagname
+    
+    $("#formDelete").attr("action", `/closet/${tagName}/${id}?_method=DELETE`)
+    $("#sure-remove").modal("show")
+}

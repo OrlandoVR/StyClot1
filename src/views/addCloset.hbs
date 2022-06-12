@@ -2,15 +2,19 @@
 {{>navigation-bar}}
 <div class="container">
     {{>nav-profile}}
-    <div class="row">
-        <div class="col-12">
-            {{>list-tags}}
+    {{>errors}}
+    <form action="/closet?_method=PUT" method="POST" enctype="multipart/form-data" id="form-add-clothe">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="row">
+            <div class="col-12">
+                {{>list-tags}}
+            </div>
         </div>
-    </div>
-    <div class="row">
-        {{>preview-image}}
-    </div>
-    <div class="row mb-4">
-        <button class="btn btn-primary">Añadir</button>
-    </div>
+        <div class="row">
+            {{>preview-image}}
+        </div>
+        <div class="row mb-4">
+            <input type="submit" value="Añadir" id="btn-add-clothe">
+        </div>
+    </form>
 </div>

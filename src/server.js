@@ -6,6 +6,7 @@ const uuid = require("uuid");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+const methodOverride = require("method-override")
 
 const equal = ("equal", (lista, myUserName) =>{
     for( i in lista){
@@ -44,6 +45,7 @@ app.use(session({
 app.use(passport.initialize()); // Esta primera configuracion necesita passport para que funcione 
 app.use(passport.session())// Esta segunda configuracion necesita passport para que funcione 
 app.use(flash());
+app.use(methodOverride("_method"))
 
 // Global Variables
 
@@ -57,6 +59,7 @@ app.use(require("./routes/user.routes"));
 app.use(require("./routes/publication.routes"));
 app.use(require("./routes/chat.routes"));
 app.use(require("./routes/closet.routes"));
+app.use(require("./routes/outfit.routes"));
 
 // Static Files
 app.use(express.static(path.join(__dirname, "public")));

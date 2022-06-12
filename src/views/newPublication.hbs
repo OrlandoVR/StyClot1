@@ -4,12 +4,7 @@
 
 <div class="container mt-5">
 
-    {{#each errors}}
-    <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
-        <h4>{{this}}</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-    </div>
-    {{/each}}
+    {{>errors}}
 
     <form {{!--action="/newPublications" --}} method="post" enctype="multipart/form-data" id="form-publicar">
         <div class="row">
