@@ -28,11 +28,6 @@ a{
 }
 
 .navigation{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 5%;
-    padding: 0 20px;
     background: var(--gris-claro);
     border-radius: 0px 0px 20px 20px;
 }
@@ -154,10 +149,11 @@ a{
     padding: 1rem;
     border-radius: 10px;
     cursor: pointer;
+    background: var(--gris-claro);
 }
 
 .borde-navegacion:hover{
-    border: .3rem solid var(--rojo);
+    background: var(--gris-oscuro);
 }
 
 .separacion{
@@ -177,6 +173,21 @@ a{
     height: 600px;
     margin-bottom: -1rem;
 }
+
+@media(max-width: 768px) {
+    .img-publication{
+        height: 468px;
+    }
+}
+
+@media(max-width: 465px) {
+    .img-publication{
+        height: 368px;
+    }
+}
+
+
+
 
 .button-post{
     background: var(--rojo);
@@ -204,6 +215,12 @@ a{
     margin-bottom: 110px;
 }
 
+@media(max-width: 450px) {
+    .contenedor{
+        margin-bottom: 10px;
+    }
+}
+
 .contenedor .wrapper{
     position: relative;
     height: 500px;
@@ -215,6 +232,12 @@ a{
     align-items: center;
     justify-content: center;
     overflow: hidden;
+}
+
+@media(max-width: 450px) {
+    .contenedor .wrapper{
+        height: 400px;
+    }
 }
 
 .wrapper .image{
@@ -276,6 +299,33 @@ a{
     font-size: 3rem;
 }
 
+@media(max-width: 450px) {
+    .content-item-tag{
+        font-size: 2rem;
+    }
+
+    .content-item-tag img{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media(max-width: 760px) {
+    .content-item-tag{
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .content-item-tag img{
+        width: 70px;
+        height: 70px;
+    }
+    
+    .content-item-tag p{
+        margin-top: 1rem;
+    }
+}
+
 .content-item-tag div{
     display: flex;
     gap: 2rem;
@@ -316,6 +366,22 @@ a{
     font-size: 1.1rem;
     height: 100%;
     margin-top: 12px;
+}
+
+@media(max-width: 1000px) {
+    .target-chat-image-name-p{
+        display: none;
+    }
+}
+
+@media(max-width: 465px) {
+    .target-chat-image-name-p{
+        display: none;
+    }
+
+    .online, .offline{
+        display: none;
+    }
 }
 
 .estado-user{
@@ -388,9 +454,12 @@ a{
 /* Buscador */
 
 .contenedor-buscador{
+    background: var(--blanco);
     width: 100%;
     z-index: 1;
     margin-top: 1rem;
+    left: -1px;
+    box-shadow: 0px 0px 10px var(--negro);
 }
 
 .item-buscador img{
@@ -403,8 +472,12 @@ a{
     padding: 5px;
 }
 
+.item-buscador p{
+    margin-top: 0.4rem;
+}
+
 .item-buscador:hover{
-    background-color: #66bb6a;
+    background-color: var(--gris-claro);
 }
 
 
@@ -413,7 +486,7 @@ a{
 .modal-body{
     overflow-x: hidden;
     overflow-y: scroll;
-    
+
     height: 75vh;
 }
 
@@ -438,14 +511,40 @@ a{
 
 /* Profile */
 
-#nav-profile div img{
+.container-data-profile{
+    background: var(--gris-claro);
+    border-radius: 20px;
+}
+
+.div-data-publication{
+    width: min-content;
+    margin: 0 auto;
+    padding: 0.5rem;
+    border-radius: 20px;
+}
+
+.nav-profile div img{
     width: 100px;
     height: 100px;
 }
 
-#nav-profile div:hover{
+.nav-profile div:hover{
     cursor: pointer;
     background-color: var(--azul);
+}
+
+@media(max-width: 768px) {
+    .nav-profile div img{
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media(max-width: 575px) {
+    .nav-profile div img{
+        width: 50px;
+        height: 50px;
+    }
 }
 
 .grid-profile{
@@ -459,6 +558,7 @@ a{
     display: flex;
     justify-content: center;
     background: #000;
+    border: 1px solid var(--negro);
 }
 
 .grid-profile img{
@@ -467,7 +567,26 @@ a{
 }
 
 .grid-profile-item{
+    height: 400px;
     position: relative;
+}
+
+@media(max-width: 1124px) {
+    .grid-profile-item{
+        height: 350px;
+    }
+}
+
+@media(max-width: 768px) {
+    .grid-profile-item{
+        height: 200px;
+    }
+}
+
+@media(max-width: 575px) {
+    .grid-profile-item{
+        height: 150px;
+    }
 }
 
 .grid-profile-item i{
@@ -483,4 +602,33 @@ a{
 
 .div-publication-tags{
     display: none;
+}
+
+/* Move */
+
+.divClotheMove img{
+    width: 150px;
+    height: 150px;
+}
+
+.divClotheMove{
+    cursor: pointer;
+    position: static;
+}
+
+/* Añadir una ropa */
+
+.btn-add-clothe, .btn-add-outfit{
+    width: 100%;
+    background: var(--rojo);
+    border-radius: 1.5rem;
+    font-size: 1.5rem;
+    padding: 0 2rem;
+}
+
+@media(max-width: 575px) {
+    .swiper img{
+        width: 80px;
+        height: 80px;
+    }
 }

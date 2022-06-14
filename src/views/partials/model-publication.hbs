@@ -28,7 +28,7 @@
             </div>
             <div class="divIcons__comment" data-id="{{this._id}}"></div>
             <div class="divIcons__rack">
-                <img src="/pngIcons/unrack.png" alt="" data-id="{{this._id}}" class="icon-rack">
+                <img src="/pngIcons/rack.png" alt="" data-id="{{this._id}}" class="icon-rack">
             </div>
         </div>
     </div>
@@ -51,13 +51,13 @@
     {{/each}}
 </div>
 
-<div class="modal fade bd-example-modal-lg modal-comment" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-lg modal-comment" id="modal-comment" tabindex="-1" role="dialog"
     aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close btn-close-modal-comment" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

@@ -12,17 +12,24 @@
 
         <div class="row">
             <div class="col-12">
-                {{>list-tags}}
+
+                <div class="swiper mySwiper2">
+                    <div class="swiper-wrapper ps-5" id="list-clothes-slider">
+                        {{!-- Clothes --}}
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="bg-primary" style="height: 700px; width: 100%;">
-
+            <div class="bg-primary" id="boxClothe" style="height: 700px; width: 100%;">
+                {{!-- Contenedor donde va las imagenes --}}
             </div>
         </div>
         <div class="row mb-4 mt-4">
-            <button class="btn btn-primary">Añadir</button>
+            <button class="btn-add-outfit">Añadir</button>
         </div>
     </form>
 </div>

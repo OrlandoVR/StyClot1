@@ -1,7 +1,6 @@
 var recoveryEmailGlobal = null
 
 $(function () {
-
     // Log out
 
     $("#logout").on("click", () => {
@@ -12,6 +11,8 @@ $(function () {
         if ($("#textCampoVacioEmail")) {
             $("#textCampoVacioEmail").remove()
         }
+
+        $("#recoveryEmail").val("")
 
         $("#modal-write-email").modal("show");
     });
@@ -41,6 +42,8 @@ $(function () {
                     const rst = res.rst
                     if (rst) {
                         $("#modal-write-email").modal("hide");
+                        $("#recoveryPassword").val("")
+                        $("#recoveryRepeatPassword").val("")
                         $("#modal-write-password").modal("show");
                     } else {
                         $("#divRecoveryEmail").append('<p class="text-warning" id="textCampoVacioEmail">No existe ese correo</p>');
@@ -220,8 +223,10 @@ $(function () {
             div_publication_like.forEach(element => {
                 if (event.target.dataset.id == element.dataset.id) {
                     if (window.getComputedStyle(element).getPropertyValue("display") == "none") {
+                        rack.setAttribute("src", "/pngIcons/unrack.png")
                         element.style.display = "block"
                     } else {
+                        rack.setAttribute("src", "/pngIcons/rack.png")
                         element.style.display = "none"
                     }
                 }
@@ -372,6 +377,10 @@ $(function () {
         }
     })
 
+    $(".btn-close-modal-comment").on("click", e=>{
+        $("#modal-comment").modal("hide")
+    })
+
     // Buscador
 
     $(document).on("click", function (e) {
@@ -505,17 +514,18 @@ $(function () {
         })
     })
 
-    // Slider Tags
+    // Slider Tags for allClothe
 
     $(":input[name='check-tag']").on("click", e => {
-        const regExp = new RegExp(/^\/closet\/\S*$/)
+        const regExpCloset = new RegExp(/^\/closet\/\S*$/)
+        const regExpOutfit = new RegExp(/^\/addOutfit\/\S*$/)
 
         var tagName = e.currentTarget.defaultValue
         $(".tagNameHidden").val(tagName)
 
         const currentUrl = window.location
 
-        if (regExp.test(currentUrl.pathname) || currentUrl.pathname == "/closet") {
+        if (regExpCloset.test(currentUrl.pathname) || currentUrl.pathname == "/closet") {
             console.log("paso test")
             // window.location.href = `/closet/${tagName}`
             $.ajax({
@@ -527,7 +537,7 @@ $(function () {
                     $(".content-grid-closet").html("")
                     if (res.sendClothes) {
                         res.sendClothes.forEach(element => {
-                            $(".content-grid-closet").append(`<div class="grid-profile-item">
+                            $(".content-grid-closet").append(`<div class="grid-profile-item bg-black">
                             <img src="/img/clothes/${element.image}" alt="" height="300px">
                             <i class="fa-solid fa-xmark remove-clothe" onclick="openModalSureRemove(this)" data-id="${element._id}" data-tagname="${element.tagName}"></i>
                             </div>
@@ -541,18 +551,125 @@ $(function () {
                     alert("error")
                 }
             })
+        } else if (regExpOutfit.test(currentUrl.pathname) || currentUrl.pathname == "/addOutfit") {
+            $.ajax({
+                url: `/outfit/${tagName}`,
+                method: "POST",
+                success: (res) => {
+
+                    $("#list-clothes-slider").empty()
+                    res.clothesByTagName.forEach(element => {
+                        console.log(element.image)
+                        $("#list-clothes-slider").append(`<div class="swiper-slide d-flex justify-content-center bg-dark divClotheMove" onmousedown="seleccionar(this)"> 
+                        <img src="/img/clothes/${element.image}" alt=""> 
+                    </div>`)
+                    });
+
+                    var swiper2 = new Swiper(".mySwiper2", {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                        slidesPerGroup: 3,
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        },
+                    });
+
+                    console.log(res)
+                    console.log("bien despues de addOutfit")
+                },
+                error: () => {
+                    alert("error")
+                }
+            })
         }
     })
 });
 
 // Remove Clothe
 
-const openModalSureRemove = e=>{
+const openModalSureRemove = e => {
     console.log(e)
 
     const id = e.dataset.id
     const tagName = e.dataset.tagname
-    
+
     $("#formDelete").attr("action", `/closet/${tagName}/${id}?_method=DELETE`)
     $("#sure-remove").modal("show")
 }
+
+
+// Move Clothe
+
+let listaItem = document.getElementsByClassName("divClotheMove")
+console.log(listaItem)
+
+var evento
+var xElement = ""
+var yElement = ""
+
+var elementCaja
+
+function seleccionar(e) {
+
+    console.log("seleccionar")
+    console.log(e.which)
+
+    evento = e
+
+    xElement = evento.getBoundingClientRect().x
+    yElement = evento.getBoundingClientRect().y
+
+    evento.style.position = "absolute"
+    evento.style.backgroundColor = "red"
+
+    let boxClothe = document.getElementById("boxClothe")
+    elementCaja = boxClothe
+
+    boxClothe.setAttribute("onmousemove", "mover()")
+    boxClothe.setAttribute("onmouseup", "soltar(this)")
+}
+
+function mover() {
+    console.log("mover")
+
+    const widthElement = evento.getBoundingClientRect().width
+    const heightElement = evento.getBoundingClientRect().height
+
+    elementCaja.onmousemove = function (evt) {
+
+        let widthContenedor = parseInt(window.getComputedStyle(elementCaja).getPropertyValue("width"))
+        let heightContenedor = parseInt(window.getComputedStyle(elementCaja).getPropertyValue("height"))
+
+        var x = evt.pageX
+        var y = evt.pageY
+
+        if (x + widthElement > widthContenedor || y + heightElement > heightContenedor) {
+            evento.style.cursor = "not-allowed"
+        } else {
+            evento.style.cursor = "pointer"
+        }
+
+        evento.style.left = x + "px"
+        evento.style.top = y + "px"
+    }
+}
+
+function soltar() {
+    console.log("soltar")
+
+    var cursorName = window.getComputedStyle(evento).getPropertyValue("cursor")
+
+    if (cursorName == "not-allowed") {
+
+        evento.style.position = "static"
+        evento.style.left = xElement + "px"
+        evento.style.top = yElement + "px"
+
+    } else {
+    }
+    elementCaja.removeAttribute("onmousemove")
+    elementCaja.removeAttribute("onmousedown")
+    evento = null
+}
+

@@ -41,7 +41,7 @@ body{
     margin-top: -7rem;
 }
 
-@media(max-width: 768px) {
+@media(max-width: 1000px) {
     .logo{
         margin-top: 0;
         font-size: 6rem;
@@ -121,7 +121,7 @@ body{
 
 .divEmail__i{
     position: absolute;
-    top:30px;
+    top:27px;
     left:10px
 }
 
@@ -132,7 +132,13 @@ body{
 
 .divPassword__i{
     position: absolute;
-    top:28px;
+    top:27px;
+    left:10px;
+}
+
+.divRecoveryPassword__i{
+    position: absolute;
+    top:16px;
     left:10px;
 }
 
