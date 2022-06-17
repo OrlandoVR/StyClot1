@@ -113,14 +113,6 @@ indexCtrl.checkSamePassword = async (req, res) => {
     const user = await User.findOne({email})
     user.password = await user.encrypPassword(password)
     user.save()
-    // const updatePass = await User.update({
-    //     email: email    
-    // },
-    // {
-    //     $set: {
-    //         password: await User.password.encrypPassword(password)
-    //     }
-    // })
 
     if(user.password) res.json({ rst: true })
     else res.json({ rst: false })

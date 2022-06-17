@@ -439,7 +439,7 @@ a{
 
 /* Modal tag */
 
-#icon-pants, #icon-t-shirt, #icon-sun-hat, #icon-sandals, #icon-dress {
+#icon-pants, #icon-t-shirt, #icon-sun-hat, #icon-sandals, #icon-dress, #icon-zapatillas, #icon-short {
     cursor: pointer;
 }
 
@@ -606,12 +606,30 @@ a{
 
 /* Move */
 
+/* .swiper, .mySwiper2{
+    position: static !important;
+}
+
+.swiper-wrapper{
+    position: static;
+} */
+
+
+#list-clothes-slider{
+    position: static
+}
+
+#boxClothe{
+    position: static;
+}
+
 .divClotheMove img{
     width: 150px;
     height: 150px;
 }
 
 .divClotheMove{
+    /* z-index: 2; */
     cursor: pointer;
     position: static;
 }

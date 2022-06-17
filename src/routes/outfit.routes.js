@@ -12,7 +12,7 @@ router.get("/outfit", isAuthenticated, getOutfit)
 
 router.post("/outfit/:tagName", isAuthenticated, getClotheByTagName)
 
-router.put("/outfit", isAuthenticated, addOutfit)
+router.post("/outfit", isAuthenticated, addOutfit)
 
 router.delete("/outfit/:id", isAuthenticated, removeOutfit)
 

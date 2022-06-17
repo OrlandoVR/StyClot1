@@ -167,12 +167,6 @@ $(function () {
         $("#modal-tag").modal("hide")
     })
 
-    // $("#add-modal-tag").on("click", () => {
-    //     const store = $("#store-modal-tag").val()
-    //     const price = $("#price-modal-tag").val()
-    // })
-
-
     // Boton Seguir
 
     $("#btn-seguir").change(e => {
@@ -377,7 +371,7 @@ $(function () {
         }
     })
 
-    $(".btn-close-modal-comment").on("click", e=>{
+    $(".btn-close-modal-comment").on("click", e => {
         $("#modal-comment").modal("hide")
     })
 
@@ -505,8 +499,22 @@ $(function () {
             method: "POST",
             data: formData,
             success: (res) => {
-                console.log("w")
-                window.location.href = "/publications"
+                console.log(res)
+                if (res.errors.length > 0) {
+                    console.log("hay error")
+                    res.errors.forEach(element => {
+                        $("#errors").html("")
+                        $("#errors").append(`
+                            <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+                            <h4>${element}</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                            </div>
+                        `)
+                    });
+                } else {
+                    console.log("no hay error")
+                    window.location.href = "/publications"
+                }
             },
             error: () => {
                 alert("error")
@@ -556,27 +564,35 @@ $(function () {
                 url: `/outfit/${tagName}`,
                 method: "POST",
                 success: (res) => {
+                    console.log($(".lista-ropas"))
+                    $(".lista-ropas").empty()
 
-                    $("#list-clothes-slider").empty()
                     res.clothesByTagName.forEach(element => {
-                        console.log(element.image)
-                        $("#list-clothes-slider").append(`<div class="swiper-slide d-flex justify-content-center bg-dark divClotheMove" onmousedown="seleccionar(this)"> 
-                        <img src="/img/clothes/${element.image}" alt=""> 
-                    </div>`)
+                        console.log("1")
+                        $(".lista-ropas").append(`<img src="/img/clothes/${element.image}" alt="" style="width: 300px; height: 150px;" draggable="true" ondragstart="drag(event)" id="${element._id}">`)
                     });
 
-                    var swiper2 = new Swiper(".mySwiper2", {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                        slidesPerGroup: 3,
-                        navigation: {
-                            nextEl: ".swiper-button-next",
-                            prevEl: ".swiper-button-prev",
-                        },
-                    });
+                    // Codigo recuperado
+                    // $("#list-clothes-slider").empty()
+                    // res.clothesByTagName.forEach(element => {
 
-                    console.log(res)
-                    console.log("bien despues de addOutfit")
+                    //     $("#list-clothes-slider").append(`<div class="swiper-slide d-flex justify-content-center bg-dark divClotheMove" onmousedown="seleccionar(this)"> 
+                    //     <img src="/img/clothes/${element.image}" alt=""> 
+                    // </div>`)
+                    // });
+
+                    // var swiper2 = new Swiper(".mySwiper2", {
+                    //     slidesPerView: 3,
+                    //     spaceBetween: 20,
+                    //     slidesPerGroup: 3,
+                    //     allowTouchMove: false,
+                    //     navigation: {
+                    //         nextEl: ".swiper-button-next",
+                    //         prevEl: ".swiper-button-prev",
+                    //     },
+                    // });
+                    // console.log("bien despues de addOutfit")
+                    //Codigo recuperado
                 },
                 error: () => {
                     alert("error")
@@ -584,6 +600,7 @@ $(function () {
             })
         }
     })
+
 });
 
 // Remove Clothe
@@ -598,78 +615,52 @@ const openModalSureRemove = e => {
     $("#sure-remove").modal("show")
 }
 
+//Remove Outfit
 
-// Move Clothe
+const openModalSureRemoveOutfit = e => {
+    console.log(e)
 
-let listaItem = document.getElementsByClassName("divClotheMove")
-console.log(listaItem)
+    const id = e.dataset.id
 
-var evento
-var xElement = ""
-var yElement = ""
-
-var elementCaja
-
-function seleccionar(e) {
-
-    console.log("seleccionar")
-    console.log(e.which)
-
-    evento = e
-
-    xElement = evento.getBoundingClientRect().x
-    yElement = evento.getBoundingClientRect().y
-
-    evento.style.position = "absolute"
-    evento.style.backgroundColor = "red"
-
-    let boxClothe = document.getElementById("boxClothe")
-    elementCaja = boxClothe
-
-    boxClothe.setAttribute("onmousemove", "mover()")
-    boxClothe.setAttribute("onmouseup", "soltar(this)")
+    $("#formDeleteOutfit").attr("action", `/outfit/${id}?_method=DELETE`)
+    $("#sure-remove-outfit").modal("show")
 }
 
-function mover() {
-    console.log("mover")
 
-    const widthElement = evento.getBoundingClientRect().width
-    const heightElement = evento.getBoundingClientRect().height
+//MOVER ROPA
 
-    elementCaja.onmousemove = function (evt) {
-
-        let widthContenedor = parseInt(window.getComputedStyle(elementCaja).getPropertyValue("width"))
-        let heightContenedor = parseInt(window.getComputedStyle(elementCaja).getPropertyValue("height"))
-
-        var x = evt.pageX
-        var y = evt.pageY
-
-        if (x + widthElement > widthContenedor || y + heightElement > heightContenedor) {
-            evento.style.cursor = "not-allowed"
-        } else {
-            evento.style.cursor = "pointer"
-        }
-
-        evento.style.left = x + "px"
-        evento.style.top = y + "px"
-    }
+function allowDrop(ev) {
+    ev.preventDefault();
 }
 
-function soltar() {
-    console.log("soltar")
-
-    var cursorName = window.getComputedStyle(evento).getPropertyValue("cursor")
-
-    if (cursorName == "not-allowed") {
-
-        evento.style.position = "static"
-        evento.style.left = xElement + "px"
-        evento.style.top = yElement + "px"
-
-    } else {
-    }
-    elementCaja.removeAttribute("onmousemove")
-    elementCaja.removeAttribute("onmousedown")
-    evento = null
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
 }
 
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+
+//CAPTURA DEL DIV
+
+function captura() {
+
+    html2canvas($('#vestidor')[0]).then(function (canvas) {
+        const base64URL = canvas.toDataURL("image/jpeg")
+        $.ajax({
+            url: "/outfit",
+            method: "POST",
+            data: { base64URL },
+            success: (res) => {
+                console.log(res.rst)
+
+                window.location.href = "/outfit"
+            },
+            error: () => {
+                alert("error")
+            }
+        })
+    });
+}

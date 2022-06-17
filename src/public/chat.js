@@ -12,19 +12,13 @@ $(function () {
             let estados = document.querySelectorAll(".estado-user")
 
             estados.forEach(estado => {
-                console.log("1")
                 listaChatUsuarios.forEach(element => {
-                    console.log("2")
                     if (element.receptor._id == estado.dataset.id) {
-                        console.log("3")
-                        console.log(element.receptor.userName+"--"+element.receptor.estado)
                         if (element.receptor.estado) {
-                            console.log("4")
                             estado.classList.remove("offline")
                             estado.classList.add("online") // ONLINE
     
                         } else {
-                            console.log("5")
                             estado.classList.remove("online")
                             estado.classList.add("offline"); // OFFLINE
                         }
@@ -33,10 +27,6 @@ $(function () {
                 
             })
 
-            console.log("////////////////////")
-            console.log(listaChatUsuarios)
-            console.log("////////////////////")
-            console.log("----------->" + userName)
             socket.emit("new user", { userName, listaChatUsuarios })
         },
         error: () => {

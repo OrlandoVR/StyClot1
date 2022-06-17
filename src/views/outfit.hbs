@@ -5,47 +5,19 @@
     {{>nav-profile}}
 
     <div class="grid-profile mt-5">
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-            <i class="fa-solid fa-xmark btn-delete-tag"></i>
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-            <i class="fa-solid fa-xmark btn-delete-tag"></i>
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-            <i class="fa-solid fa-xmark btn-delete-tag"></i>
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-            <i class="fa-solid fa-xmark btn-delete-tag"></i>
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-            <i class="fa-solid fa-xmark btn-delete-tag"></i>
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-            <i class="fa-solid fa-xmark btn-delete-tag"></i>
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-        </div>
-        <div class="grid-profile-item">
-            <img src="pngIcons/dress.png" alt="" height="300px">
-        </div>
+
+        {{#if sendOutfits}}
+            {{#each sendOutfits}}
+            <div class="grid-profile-item">
+                <img src="{{this.image}}" alt="" height="300px">
+                <i class="fa-solid fa-xmark btn-delete-tag" data-id="{{this._id}}" onclick="openModalSureRemoveOutfit(this)"></i>
+            </div>
+            {{/each}}
+        {{else}}
+        <h4 class="text-center">No hay Outfits</h4>
+        {{/if}}
+
     </div>
 </div>
+
+{{>modal-remove-outfit}}

@@ -3,33 +3,26 @@
 
 <div class="container">
     {{>nav-profile}}
-    <form>
-        <div class="row">
-            <div class="col-12">
-                {{>list-tags}}
-            </div>
+    <div class="row">
+        <div class="col-12">
+            {{>list-tags}}
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-12">
+    <div class="row" style="height: 600px;">
+        <div class="col-3 bg-danger lista-ropas d-flex flex-column align-items-center" ondrop="drop(event)" ondragover="allowDrop(event)"
+            style="height: 100%; overflow-y: scroll;">
 
-                <div class="swiper mySwiper2">
-                    <div class="swiper-wrapper ps-5" id="list-clothes-slider">
-                        {{!-- Clothes --}}
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
         </div>
+        <div class="col-9 bg-primary d-flex flex-column justify-content-center align-items-center" id="vestidor"
+            ondrop="drop(event)" ondragover="allowDrop(event)" style="height: 100%;">
 
-        <div class="row">
-            <div class="bg-primary" id="boxClothe" style="height: 700px; width: 100%;">
-                {{!-- Contenedor donde va las imagenes --}}
-            </div>
         </div>
-        <div class="row mb-4 mt-4">
-            <button class="btn-add-outfit">Añadir</button>
-        </div>
-    </form>
+    </div>
+
+    <div class="row mb-4 mt-4">
+        <button class="btn-add-outfit" onclick="captura()">Añadir</button>
+    </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>

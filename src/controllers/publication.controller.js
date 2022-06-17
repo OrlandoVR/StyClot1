@@ -4,7 +4,6 @@ const path = require("path")
 
 const Publication = require("../models/Publication")
 const User = require("../models/User")
-// const { use } = require("passport")
 
 const indexCtrl = {};
 
@@ -12,7 +11,6 @@ indexCtrl.allPublication = async (req, res) => {
     const userId = req.user.id;
 
     const myUser = await User.findById(userId).lean();
-    console.log("-----" + myUser.userName)
 
     const publications = await Publication.find({ "user.userName": myUser.siguiendo }).sort({ createdAt: "desc" }).lean();
     res.render("home", { publications, userName: myUser.userName });
@@ -36,8 +34,6 @@ indexCtrl.goMyProfile = async (req, res) => {
 }
 
 indexCtrl.postPublication = async (req, res) => {
-    
-    console.log(req.body)
 
     const description = req.body.addDescriptionImage
     const stringTags = req.body.tags
@@ -51,10 +47,9 @@ indexCtrl.postPublication = async (req, res) => {
     }
     
     if(errors.length>0){
-        console.log("1")
-        res.render("newPublication", {errors})
+        console.log("hay error")
     }else{
-        console.log("2")
+        console.log("no hay error")
         const image = req.file.originalname
         const user = await User.findById(req.user.id)
         
@@ -70,9 +65,8 @@ indexCtrl.postPublication = async (req, res) => {
         }
 
         await newPublication.save();
-    
-        res.redirect("/publications")
     }
+    res.json({errors})
 }
 
 indexCtrl.goOtherProfile = async (req, res) => {
@@ -82,21 +76,12 @@ indexCtrl.goOtherProfile = async (req, res) => {
 
     if (myUserId === otherUserId) res.redirect("/profile")
     else {
-        //let seguir = false
-
         const user = await User.findById(otherUserId).lean()
-        //const myUser = await User.findById(myUserId).lean()
         const userName = user.userName
-
-        //const lista = myUser.siguiendo
-
-        /*lista.forEach((element, i) => {
-            if (element == userName) seguir = true
-        });*/
 
         const publications = await Publication.find({ "user.userName": userName }).lean();
 
-        res.render("otherProfile", { user, publications/*, seguir*/ })
+        res.render("otherProfile", { user, publications})
     }
 }
 
