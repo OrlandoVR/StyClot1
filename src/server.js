@@ -4,7 +4,7 @@ const path = require("path");
 const multer = require("multer");
 const uuid = require("uuid");
 const flash = require("connect-flash");
-const session = require("cookie-session");
+const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override")
 
