@@ -8,4 +8,4 @@ mongoose.connect( MONGODB_URI, {
     useNewUrlParser: true,
 })
     .then(db => console.log("Database is connect"))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err)) 
